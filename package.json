@@ -3,18 +3,21 @@
   "version": "0.0.1",
   "description": "An imperative dialog for el-dialog in element-ui@2",
   "license": "MIT",
-  "main": "",
-  "types": "",
+  "main": "dist/VueElementDialog.umd.min.js",
+  "module": "dist/VueElementDialog.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "serve": "vue-cli-service serve ./example/main.js --open",
+    "build": "vue-cli-service build --name VueElementDialog --entry ./src/index.js --target lib",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kimozhang/vue2-element-dialog.git"
-  },
-  "private": false,
-  "scripts": {
-    "serve": "vue-cli-service serve ./example/main.js --open",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
