@@ -1,5 +1,5 @@
 {
-  "name": "vue-element-dialog",
+  "name": "vue2-element-dialog",
   "version": "0.0.1",
   "description": "An imperative dialog for el-dialog in element-ui@2",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "types": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kimozhang/vue-element-dialog.git"
+    "url": "https://github.com/kimozhang/vue2-element-dialog.git"
   },
   "private": false,
   "scripts": {
