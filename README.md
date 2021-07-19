@@ -98,14 +98,39 @@ Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/
 
 ### Special options
 
-- content: required, to display content in dialog
-- props: declared props of content
-- cache: whether to cache instance of dialog, default is false
+#### content
+Required: `true`<br>
+Type: `Object`<br>
+
+To display content in dialog
+
+#### props
+Required: `false`<br>
+Type: `Object`<br>
+
+Declared props of content
+
+#### cache
+Required: `false`<br>
+Type: `Boolean`<br>
+Default: `true`
+
+Whether to cache instance of dialog
+
+#### callback(action, param1, ...)
+Required: `false`<br>
+Type: `Function`<br>
+
+Triggers when to execute an action, you can custom an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
+
+```js
+this.$close('myAction', param1, ...)
+```
 
 ## Events
 
-You can invoke them in your component to determine a status of dialog while passing on parameters.
+You can invoke them in your component to execute an action for dialog while passing on some parameters.
 
-- `confirm`: a "confirm" status, `this.$emit('confirm', param1, ....)`
-- `cancel`: a "cancel" status, `this.$emit('cancel', param1, ....)`
+- `confirm`: an action of "confirm" to resolve `this.$emit('confirm', param1, ....)`
+- `cancel`: an action of "cancel" to reject, `this.$emit('cancel', param1, ....)`
 - `close`: just want to close the current dialog, `this.$emit('close')`
