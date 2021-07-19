@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <el-button type="primary" @click="onOpen">open</el-button>
+    <el-button type="primary" @click="onOpen">Base</el-button>
+    <el-button type="primary" @click="onCustomAction">Custom Action</el-button>
   </div>
 </template>
 
 <script>
 import Base from './components/Base'
+import CustomAction from './components/CustomAction'
 
 export default {
   name: 'App',
@@ -14,8 +16,6 @@ export default {
     onOpen() {
       this.$dialog({
         title: 'Basic',
-        width: '400px',
-        // cache: true,
         content: Base,
         props: {
           msg: 'Hello, Vue.js!',
@@ -27,6 +27,23 @@ export default {
         .catch((err) => {
           console.log('Cancel', err)
         })
+    },
+
+    onCustomAction() {
+      this.$dialog({
+        title: 'Custom Action',
+        content: CustomAction,
+        props: {
+          msg: 'Hello, Vue.js!',
+        },
+        callback: (action, value) => {
+          if (action === 'ok') {
+            console.log('ok', value)
+          } else if (action === 'no') {
+            console.log('no', value)
+          }
+        },
+      })
     },
   },
 }

@@ -1,16 +1,17 @@
 <template>
-  <div class="base-wrap">
+  <div class="CustomAction-wrap">
     <div class="content">{{ msg }}</div>
+
     <div class="btn-wrap">
-      <el-button @click="onCancel">Cancel</el-button>
-      <el-button type="primary" @click="onConfirm">Confirm</el-button>
+      <el-button @click="onCustomNo">Custom Action NO</el-button>
+      <el-button type="primary" @click="onCustomOk">Custom Action OK</el-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Base',
+  name: 'CustomAction',
 
   props: {
     msg: String,
@@ -23,12 +24,18 @@ export default {
     onConfirm() {
       this.$emit('confirm', 'OK')
     },
+    onCustomNo() {
+      this.$emit('close', 'no', 'NO')
+    },
+    onCustomOk() {
+      this.$emit('close', 'ok', 'OK')
+    },
   },
 }
 </script>
 
 <style scoped>
-.base-wrap {
+.CustomAction-wrap {
   text-align: center;
 }
 .content {
