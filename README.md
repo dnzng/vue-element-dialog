@@ -1,4 +1,4 @@
-# vue-element-dialog
+# vue2-element-dialog
 
 An imperative dialog for `el-dialog` in `element-ui` based on vue@2
 
