@@ -124,7 +124,7 @@ Type: `Function`<br>
 Triggers when to execute an action, you can custom an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
 
 ```js
-this.$close('myAction', param1, ...)
+this.$emit('close', 'myAction', param1, ...)
 ```
 
 ## Events
