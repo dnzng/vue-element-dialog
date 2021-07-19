@@ -24,7 +24,7 @@ function createDialog(options = {}) {
     props: defaultSlotProps = {},
     content: defaultSlot = {},
     callback,
-    isCached = false,
+    cache = false,
     ...elDialogProps
   } = Object.assign({}, globalOptions, options)
 
@@ -32,11 +32,11 @@ function createDialog(options = {}) {
   let _resolve
   let _reject
 
-  if (isCached && map.has(defaultSlot)) {
+  if (cache && map.has(defaultSlot)) {
     vm = map.get(defaultSlot)
   } else {
     vm = createVM(defaultSlot)
-    if (isCached) {
+    if (cache) {
       map.set(defaultSlot, vm)
     }
   }
@@ -56,7 +56,7 @@ function createDialog(options = {}) {
       }
     }
 
-    if (!isCached) {
+    if (!cache) {
       destroy(vm)
     }
   }

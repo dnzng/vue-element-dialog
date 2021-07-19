@@ -18,10 +18,10 @@ export default {
 
   methods: {
     onCancel() {
-      this.$emit('cancel', 'cancel')
+      this.$emit('cancel', 'NO')
     },
     onConfirm() {
-      this.$emit('confirm', true)
+      this.$emit('confirm', 'OK')
     },
   },
 }
