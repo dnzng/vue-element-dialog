@@ -1,6 +1,6 @@
 {
   "name": "vue2-element-dialog",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An imperative dialog for el-dialog in element-ui@2",
   "license": "MIT",
   "main": "dist/VueElementDialog.umd.min.js",
