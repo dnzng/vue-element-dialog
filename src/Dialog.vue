@@ -1,9 +1,5 @@
 <template>
-  <el-dialog
-    :visible.sync="visible"
-    v-bind="elDialogProps"
-    @closed="onClosed"
-  >
+  <el-dialog :visible.sync="visible" v-bind="elDialogProps" @closed="onClosed">
     <!-- DefaultSlot Component have already been registered during Vue.extend -->
     <default-slot
       v-bind="defaultSlotProps"
