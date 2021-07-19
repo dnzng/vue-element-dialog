@@ -15,7 +15,7 @@ npm i vue2-element-dialog
 ### Register
 
 ```js
-import Vue from 'vue'
+import Vue from 'vue' // vue@2.x
 import ElementUI from 'element-ui'
 import VueElementDialog from 'vue2-element-dialog'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -50,9 +50,9 @@ export default {
           msg: 'Hello, Vue.js'
         }
       }).then((val) => {
-        console.log(val)  // ok
-      }).catch(() => {
-        console.log('cancel)
+        console.log(val)  // OK
+      }).catch((err) => {
+        console.log(err) // NO
       })
     }
   }
@@ -82,10 +82,10 @@ export default {
   },
   methods: {
     onCancel() {
-      this.$emit('cancel')
+      this.$emit('cancel', 'NO')
     },
     onConfirm() {
-      this.$emit('confirm', 'ok')
+      this.$emit('confirm', 'OK')
     }
   }
 }
