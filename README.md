@@ -1,13 +1,13 @@
-# vue2-element-dialog
+# vue-element-dialog
 
-An imperative dialog for `el-dialog` in `element-ui` based on vue@2
+An imperative dialog for [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2
 
 ## Install
 
 ```bash
-yarn add vue2-element-dialog
+yarn add vue-element-dialog element-ui
 # or
-npm i vue2-element-dialog
+npm i vue-element-dialog element-ui
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ npm i vue2-element-dialog
 ```js
 import Vue from 'vue' // vue@2.x
 import ElementUI from 'element-ui'
-import VueElementDialog from 'vue2-element-dialog'
+import VueElementDialog from 'vue-element-dialog'
 import 'element-ui/lib/theme-chalk/index.css'
  
 Vue.use(ElementUI)
