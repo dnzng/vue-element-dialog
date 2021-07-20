@@ -101,12 +101,14 @@ Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/
 #### content
 Required: `true`<br>
 Type: `Object`<br>
+Default: `{}`
 
 To display content in dialog
 
 #### props
 Required: `false`<br>
 Type: `Object`<br>
+Default: `{}`
 
 Declared props of content
 
