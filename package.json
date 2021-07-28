@@ -13,7 +13,7 @@
     "serve": "vue-cli-service serve ./example/main.js --open",
     "build": "vue-cli-service build --name VueElementDialog --entry ./src/index.js --target lib",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --ignore-path dist"
   },
   "repository": {
     "type": "git",
