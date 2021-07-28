@@ -17,11 +17,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kimozhang/vue2-element-dialog.git"
+    "url": "https://github.com/kimozhang/vue-element-dialog.git"
   },
-  "homepage": "https://github.com/kimozhang/vue2-element-dialog#readme",
+  "homepage": "https://github.com/kimozhang/vue-element-dialog#readme",
   "bugs": {
-    "url": "https://github.com/kimozhang/vue2-element-dialog/issues"
+    "url": "https://github.com/kimozhang/vue-element-dialog/issues"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
