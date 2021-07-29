@@ -18,12 +18,6 @@ export default {
   },
 
   methods: {
-    onCancel() {
-      this.$emit('cancel', 'NO')
-    },
-    onConfirm() {
-      this.$emit('confirm', 'OK')
-    },
     onCustomNo() {
       this.$emit('close', 'no', 'NO')
     },

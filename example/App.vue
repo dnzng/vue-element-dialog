@@ -22,10 +22,10 @@ export default {
         },
       })
         .then((val) => {
-          console.log('Confirm', val)
+          this.$message(`Confirm: ${val}`)
         })
         .catch((err) => {
-          console.log('Cancel', err)
+          this.$message(`Cancel: ${err}`)
         })
     },
 
@@ -38,9 +38,9 @@ export default {
         },
         callback: (action, value) => {
           if (action === 'ok') {
-            console.log('ok', value)
+            this.$message(`Custom Action: ${action}; Value: ${value}`)
           } else if (action === 'no') {
-            console.log('no', value)
+            this.$message(`Custom Action: ${action}; Value: ${value}`)
           }
         },
       })

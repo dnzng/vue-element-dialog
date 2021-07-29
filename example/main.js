@@ -2,6 +2,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import App from './App'
 import VueElementDialog from '@'
+// import VueElementDialog from '../dist/VueElementDialog.umd'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
