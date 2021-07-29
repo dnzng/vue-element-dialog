@@ -136,3 +136,7 @@ You can invoke them in your component to execute an action for dialog while pass
 - `confirm`: an action of "confirm" to resolve `this.$emit('confirm', param1, ....)`
 - `cancel`: an action of "cancel" to reject, `this.$emit('cancel', param1, ....)`
 - `close`: just want to close the current dialog, `this.$emit('close')`
+
+## License
+
+MIT
