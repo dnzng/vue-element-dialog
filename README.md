@@ -92,7 +92,7 @@ export default {
 </script>
 ```
 
-## Option
+## Options
 
 Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) and do not support `slot` and `events`
 
