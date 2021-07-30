@@ -115,7 +115,7 @@ Declared props of content
 #### cache
 Required: `false`<br>
 Type: `Boolean`<br>
-Default: `true`
+Default: `false`
 
 Whether to cache instance of dialog
 
