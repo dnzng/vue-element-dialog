@@ -134,7 +134,7 @@ this.$emit('close', 'myAction', param1, ...)
 You can invoke them in your component to execute an action for dialog while passing on some parameters.
 
 - `confirm`: an "confirm" action to resolve. e.g: `this.$emit('confirm', param1, ....)`
-- `cancel`: an "cancel"action to reject. e.g: `this.$emit('cancel', param1, ....)`
+- `cancel`: an "cancel" action to reject. e.g: `this.$emit('cancel', param1, ....)`
 - `close`: just close the current dialog, e.g: `this.$emit('close')`
 
 ## License
