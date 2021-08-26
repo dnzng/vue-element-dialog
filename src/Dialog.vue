@@ -1,8 +1,8 @@
 <template>
   <el-dialog :visible.sync="visible" v-bind="elDialogProps" @closed="onClosed">
-    <!-- DefaultSlot Component have already been registered during Vue.extend -->
-    <default-slot
-      v-bind="defaultSlotProps"
+    <!-- UserComponent have already been registered during Vue.extend -->
+    <user-component
+      v-bind="userComponentProps"
       @close="close"
       @confirm="onConfirm"
       @cancel="onCancel"
@@ -18,7 +18,7 @@ export default {
     return {
       visible: false,
       elDialogProps: {},
-      defaultSlotProps: {},
+      userComponentProps: {},
     }
   },
 
@@ -27,7 +27,7 @@ export default {
       this.visible = true
     },
     close(...payload) {
-      // 不需要转成响应式
+      // Do not covert to reactive.
       this.payload = payload
       this.visible = false
     },

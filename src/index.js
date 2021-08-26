@@ -4,11 +4,11 @@ let DialogCtor
 let globalOptions
 const map = new WeakMap()
 
-function createVM(defaultSlot) {
+function createVM(comp) {
   return new DialogCtor({
     el: document.createElement('div'),
     components: {
-      defaultSlot,
+      UserComponent: comp,
     },
   })
 }
@@ -20,9 +20,9 @@ function destroy(vm) {
 }
 
 function createDialog(options = {}) {
-  let {
-    props: defaultSlotProps = {},
-    content: defaultSlot = {},
+  const {
+    props: componentProps = {},
+    content: component = {},
     callback,
     cache = false,
     ...elDialogProps
@@ -32,17 +32,17 @@ function createDialog(options = {}) {
   let _resolve
   let _reject
 
-  if (cache && map.has(defaultSlot)) {
-    vm = map.get(defaultSlot)
+  if (cache && map.has(component)) {
+    vm = map.get(component)
   } else {
-    vm = createVM(defaultSlot)
+    vm = createVM(component)
     if (cache) {
-      map.set(defaultSlot, vm)
+      map.set(component, vm)
     }
   }
 
   vm.elDialogProps = elDialogProps
-  vm.defaultSlotProps = defaultSlotProps
+  vm.userComponentProps = componentProps
 
   vm.callback = (action, ...payload) => {
     if (callback) {
