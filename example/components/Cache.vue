@@ -1,6 +1,8 @@
 <template>
-  <div class="base-wrap">
-    <div class="content">{{ msg }}</div>
+  <div class="Cache-wrap">
+    <div class="content">
+      <el-input v-model="msg" />
+    </div>
     <div class="btn-wrap">
       <el-button @click="onCancel">Cancel</el-button>
       <el-button type="primary" @click="onConfirm">Confirm</el-button>
@@ -12,8 +14,10 @@
 export default {
   name: 'Base',
 
-  props: {
-    msg: String,
+  data() {
+    return {
+      msg: 'Hi, vue-element-dialog',
+    }
   },
 
   methods: {
@@ -28,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.base-wrap {
+.Cache-wrap {
   text-align: center;
 }
 .content {

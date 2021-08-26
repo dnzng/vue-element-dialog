@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <el-button type="primary" @click="onOpen">Base</el-button>
+    <el-button type="primary" @click="onOpen">Basic</el-button>
     <el-button type="primary" @click="onCustomAction">Custom Action</el-button>
+    <el-button type="primary" @click="onCache">Cache</el-button>
   </div>
 </template>
 
 <script>
-import Base from './components/Base'
+import Basic from './components/Basic'
 import CustomAction from './components/CustomAction'
+import Cache from './components/Cache'
 
 export default {
   name: 'App',
@@ -16,16 +18,16 @@ export default {
     onOpen() {
       this.$dialog({
         title: 'Basic',
-        content: Base,
+        content: Basic,
         props: {
-          msg: 'Hello, Vue.js!',
+          msg: 'Hello, vue-element-dialog!',
         },
       })
         .then((val) => {
-          this.$message(`Confirm: ${val}`)
+          console.log(`Confirm: ${val}`)
         })
         .catch((err) => {
-          this.$message(`Cancel: ${err}`)
+          console.log(`Cancel: ${err}`)
         })
     },
 
@@ -34,7 +36,7 @@ export default {
         title: 'Custom Action',
         content: CustomAction,
         props: {
-          msg: 'Hello, Vue.js!',
+          msg: 'Hello, vue-element-dialog!',
         },
         callback: (action, value) => {
           if (action === 'ok') {
@@ -44,6 +46,20 @@ export default {
           }
         },
       })
+    },
+
+    onCache() {
+      this.$dialog({
+        title: 'Cache',
+        content: Cache,
+        cache: true,
+      })
+        .then((val) => {
+          this.$message(`Confirm: ${val}`)
+        })
+        .catch((err) => {
+          this.$message(`Cancel: ${err}`)
+        })
     },
   },
 }
