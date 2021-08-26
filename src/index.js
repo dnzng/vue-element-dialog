@@ -41,6 +41,12 @@ function createDialog(options = {}) {
     }
   }
 
+  // If not cache, enforce the `destroyOnClose` property to true
+  if (!cache) {
+    elDialogProps.destroyOnClose = true
+    delete elDialogProps['destroy-on-close']
+  }
+
   vm.elDialogProps = elDialogProps
   vm.userComponentProps = componentProps
 
