@@ -1,8 +1,10 @@
 <template>
   <el-dialog :visible.sync="visible" v-bind="elDialogProps" @closed="onClosed">
-    <!-- UserComponent have already been registered during Vue.extend -->
-    <user-component
-      v-bind="userComponentProps"
+    <!-- User Component have already been registered during creating dialog -->
+    <component
+      :is="componentName"
+      :key="key"
+      v-bind="componentProps"
       @close="close"
       @confirm="onConfirm"
       @cancel="onCancel"
@@ -12,13 +14,15 @@
 
 <script>
 export default {
-  name: 'ImperativeDialog',
+  name: 'ImperativeElDialog',
 
   data() {
     return {
       visible: false,
       elDialogProps: {},
-      userComponentProps: {},
+      componentName: '',
+      componentProps: {},
+      key: 0,
     }
   },
 

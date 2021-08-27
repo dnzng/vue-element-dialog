@@ -2,47 +2,42 @@ import DialogDefinition from './Dialog'
 
 let DialogCtor
 let globalOptions
-const map = new WeakMap()
+let uid = 0
+let vm
 
-function createVM(comp) {
-  return new DialogCtor({
+function createVM() {
+  vm = new DialogCtor({
     el: document.createElement('div'),
-    components: {
-      UserComponent: comp,
-    },
   })
 }
 
-function destroy(vm) {
-  vm.$destroy()
-  vm.$el.parentNode.removeChild(vm.$el)
-  vm = null
-}
+function init(options = {}) {
+  if (!vm) {
+    createVM()
+  }
 
-function createDialog(options = {}) {
   const {
     props: componentProps = {},
     content: component = {},
     callback,
-    cache = false,
     ...elDialogProps
   } = Object.assign({}, globalOptions, options)
-
-  let vm
   let _resolve
   let _reject
 
-  if (cache && map.has(component)) {
-    vm = map.get(component)
-  } else {
-    vm = createVM(component)
-    if (cache) {
-      map.set(component, vm)
-    }
+  if (!component._cname) {
+    component._cname = component.name ? component.name : `component-id-${uid++}`
+  }
+  const componentName = component._cname
+  // When component is options API,
+  // avoid multiple executing Vue.extend()
+  if (!DialogCtor.component(componentName)) {
+    DialogCtor.component(componentName, component)
   }
 
   vm.elDialogProps = elDialogProps
-  vm.userComponentProps = componentProps
+  vm.componentName = componentName
+  vm.componentProps = componentProps
 
   vm.callback = (action, ...payload) => {
     if (callback) {
@@ -55,10 +50,9 @@ function createDialog(options = {}) {
         _reject(...payload)
       }
     }
-
-    if (!cache) {
-      destroy(vm)
-    }
+    // destroy user component
+    vm.key++
+    _resolve = _reject = null
   }
 
   return new Promise((resolve, reject) => {
@@ -75,5 +69,5 @@ function createDialog(options = {}) {
 export default function (Vue, options = {}) {
   DialogCtor = Vue.extend(DialogDefinition)
   globalOptions = options
-  Vue.prototype.$dialog = createDialog
+  Vue.prototype.$dialog = init
 }
