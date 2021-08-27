@@ -1,0 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.wrapper .title,
+.wrapper .content {
+  margin-bottom: 20px;
+}

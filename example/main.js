@@ -4,6 +4,7 @@ import App from './App'
 import VueElementDialog from '@'
 // import VueElementDialog from '../dist/VueElementDialog.umd'
 
+import './styles/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false

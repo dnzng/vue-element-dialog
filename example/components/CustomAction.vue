@@ -1,7 +1,6 @@
 <template>
-  <div class="CustomAction-wrap">
-    <div class="content">{{ msg }}</div>
-
+  <div class="wrapper">
+    <div class="title">{{ title }}</div>
     <div class="btn-wrap">
       <el-button @click="onCustomNo">Custom Action NO</el-button>
       <el-button type="primary" @click="onCustomOk">Custom Action OK</el-button>
@@ -14,7 +13,7 @@ export default {
   name: 'CustomAction',
 
   props: {
-    msg: String,
+    title: String,
   },
 
   methods: {
@@ -27,15 +26,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.CustomAction-wrap {
-  text-align: center;
-}
-.content {
-  margin-bottom: 20px;
-}
-.btn-wrap {
-  margin-bottom: 10px;
-}
-</style>

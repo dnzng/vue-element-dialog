@@ -1,6 +1,9 @@
 <template>
-  <div class="Basic-wrap">
-    <div class="content">{{ msg }}</div>
+  <div class="wrapper">
+    <div class="title">{{ title }}</div>
+    <div class="content">
+      <el-input v-model="msg" />
+    </div>
     <div class="btn-wrap">
       <el-button @click="onCancel">Cancel</el-button>
       <el-button type="primary" @click="onConfirm">Confirm</el-button>
@@ -10,10 +13,16 @@
 
 <script>
 export default {
-  name: 'Base',
+  name: 'Basic',
 
   props: {
-    msg: String,
+    title: String,
+  },
+
+  data() {
+    return {
+      msg: 'Hi',
+    }
   },
 
   methods: {
@@ -26,15 +35,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.Basic-wrap {
-  text-align: center;
-}
-.content {
-  margin-bottom: 20px;
-}
-.btn-wrap {
-  margin-bottom: 10px;
-}
-</style>
