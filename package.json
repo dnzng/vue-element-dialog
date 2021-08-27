@@ -18,7 +18,8 @@
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js --open",
     "build": "vue-cli-service build --name VueElementDialog --entry ./src/index.js --target lib",
-    "lint": "vue-cli-service lint src example"
+    "lint": "vue-cli-service lint src example",
+    "release": "node scripts/release.js"
   },
   "repository": {
     "type": "git",
