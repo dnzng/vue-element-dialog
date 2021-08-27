@@ -112,12 +112,6 @@ Default: `{}`
 
 Declared props of content
 
-#### cache
-Required: `false`<br>
-Type: `Boolean`<br>
-Default: `false`
-
-Whether to cache instance of dialog
 
 #### callback(action, param1, ...)
 Required: `false`<br>

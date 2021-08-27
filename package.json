@@ -18,7 +18,7 @@
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js --open",
     "build": "vue-cli-service build --name VueElementDialog --entry ./src/index.js --target lib",
-    "lint": "vue-cli-service lint --ignore-path dist"
+    "lint": "vue-cli-service lint src example"
   },
   "repository": {
     "type": "git",
