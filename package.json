@@ -16,9 +16,9 @@
     "imperative"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve ./example/main.js --open",
+    "serve": "vue-cli-service serve ./examples/main.js --open",
     "build": "vue-cli-service build --name VueElementDialog --entry ./src/index.js --target lib",
-    "lint": "vue-cli-service lint src example",
+    "lint": "vue-cli-service lint src examples",
     "release": "node scripts/release.js"
   },
   "repository": {

@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="title">{{ title }}</div>
     <div class="content">
-      <el-input v-model="msg" />
+      {{ msg }}
     </div>
     <div class="btn-wrap">
       <el-button @click="onCancel">Cancel</el-button>
@@ -16,13 +15,7 @@ export default {
   name: 'Basic',
 
   props: {
-    title: String,
-  },
-
-  data() {
-    return {
-      msg: 'Hi',
-    }
+    msg: String,
   },
 
   methods: {
