@@ -94,7 +94,7 @@ export default {
 
 ## Options
 
-Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) and do not support `slot` and `events`
+Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) and do not support `slot` and `events`.
 
 ### Special options
 
@@ -103,21 +103,29 @@ Required: `true`<br>
 Type: `Object`<br>
 Default: `{}`
 
-To display content in dialog
+To display content in dialog.
 
 #### props
 Required: `false`<br>
 Type: `Object`<br>
 Default: `{}`
 
-Declared props of content
+Declared props data of content option.
+
+
+#### cache
+Required: `false`<br>
+Type: `Boolean`<br>
+Default: `false`
+
+Whether to cache el-dialog instance.
 
 
 #### callback(action, param1, ...)
 Required: `false`<br>
 Type: `Function`<br>
 
-Triggers when to execute an action, you can custom an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
+Triggers when to execute an action. You can customize an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
 
 ```js
 this.$emit('close', 'myAction', param1, ...)
