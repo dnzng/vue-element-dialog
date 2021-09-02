@@ -3,7 +3,6 @@
     <!-- User Component have already been registered during creating dialog -->
     <component
       :is="componentName"
-      :key="key"
       v-bind="componentProps"
       @close="close"
       @confirm="onConfirm"
@@ -22,7 +21,6 @@ export default {
       elDialogProps: {},
       componentName: '',
       componentProps: {},
-      key: 0,
     }
   },
 
