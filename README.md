@@ -1,6 +1,6 @@
 # vue-element-dialog
 
-An imperative dialog for [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x
+An imperative [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x
 
 ## Installation
 
