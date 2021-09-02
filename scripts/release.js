@@ -11,7 +11,7 @@ async function main() {
   await run('yarn', ['publish', '--access', 'public'])
 
   step('Push tag to Github...')
-  await run('git', ['push' '--tags'])
+  await run('git', ['push', '--tags'])
 
   step('Done')
 }
