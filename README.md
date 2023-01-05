@@ -71,7 +71,7 @@ export default {
       <el-button type="primary" @click="onConfirm">Confirm</el-button>
     </div>
   </div>
-<template>
+</template>
 
 <script>
 export default {
