@@ -19,7 +19,7 @@ import Vue from 'vue' // vue@2.x
 import ElementUI from 'element-ui'
 import VueElementDialog from 'vue-element-dialog'
 import 'element-ui/lib/theme-chalk/index.css'
- 
+
 Vue.use(ElementUI)
 Vue.use(VueElementDialog, { center: true })
 ```
@@ -128,7 +128,7 @@ Type: `Function`<br>
 Triggers when to execute an action. You can customize an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
 
 ```js
-this.$emit('close', 'myAction', param1, ...)
+this.$emit('close', 'myAction', param1, param2, param3)
 ```
 
 ## Events

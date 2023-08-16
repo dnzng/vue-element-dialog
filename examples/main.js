@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import App from './App'
-import VueElementDialog from '@'
+import App from './App.vue'
+import VueElementDialog from '../src'
 // import VueElementDialog from '../dist/VueElementDialog.umd'
 
 import './styles/index.css'
@@ -11,10 +11,9 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI, { size: 'mini' })
 Vue.use(VueElementDialog, {
-  width: '400px',
-  center: true,
+  center: true
 })
 
 new Vue({
-  render: (h) => h(App),
+  render: (h) => h(App)
 }).$mount('#app')

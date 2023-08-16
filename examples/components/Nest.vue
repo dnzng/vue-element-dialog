@@ -1,23 +1,27 @@
-<template>
-  <div class="wrapper">
-    <div class="content">I am a parent component</div>
-    <el-button type="primary" @click="onNest">nest child</el-button>
-  </div>
-</template>
-
 <script>
-import NestChild from './NestChild'
-
 export default {
   name: 'Nest',
 
-  methods: {
-    onNest() {
-      this.$dialog({
-        title: 'Nest child',
-        content: NestChild,
-      })
-    },
-  },
+  data() {
+    return {
+      innerVisible: false
+    }
+  }
 }
 </script>
+
+<template>
+  <!-- eslint-disable -->
+  <div>
+    <el-dialog
+      width="30%"
+      title="Inner Dialog"
+      :visible.sync="innerVisible"
+      append-to-body
+    />
+    <div style="text-align: center;">
+      <el-button @click="$emit('close')"> Cancel </el-button>
+      <el-button type="primary" @click="innerVisible = true">Open the Inner Dialog</el-button>
+    </div>
+  </div>
+</template>

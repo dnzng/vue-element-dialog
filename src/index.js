@@ -1,90 +1,65 @@
-import DialogDefinition from './Dialog'
+import { resolveOptions, resolveSlots } from './utils'
 
-let DialogCtor
-let globalOptions
-let uid = 0
-const map = new WeakMap()
-
-function createVM() {
-  return new DialogCtor({
-    el: document.createElement('div'),
-  })
-}
-
-function destroy(vm) {
-  vm.$destroy()
-  vm.$el.parentNode.removeChild(vm.$el)
-}
-
-function init(options = {}) {
-  const {
-    props: componentProps = {},
-    content: component = {},
-    callback,
-    cache = false,
-    ...elDialogProps
-  } = Object.assign({}, globalOptions, options)
-
-  let vm
-  let _resolve
-  let _reject
-
-  if (!component._cname) {
-    component._cname = component.name ? component.name : `component-id-${uid++}`
-  }
-  const componentName = component._cname
-
-  // When component is options API,
-  // avoid repeatly executing Vue.extend()
-  if (!DialogCtor.component(componentName)) {
-    DialogCtor.component(componentName, component)
-  }
-
-  if (cache && map.has(component)) {
-    vm = map.get(component)
-  } else {
-    vm = createVM()
-    if (cache) {
-      map.set(component, vm)
-    }
-  }
-
-  vm.elDialogProps = elDialogProps
-  vm.componentName = componentName
-  vm.componentProps = componentProps
-
-  vm.callback = (action, ...payload) => {
-    if (callback) {
-      callback(action, ...payload)
+export default function Dialog(Vue) {
+  return class Dialog {
+    constructor(options = {}) {
+      this.globalOptions = options
+      this.options = {}
+      this.createInstance()
     }
 
-    if (_resolve) {
-      if (action === 'confirm') {
-        _resolve(...payload)
-      } else if (action === 'cancel') {
-        _reject(...payload)
+    dialog(content, options) {
+      this.options = Object.assign({}, options, this.globalOptions)
+      this.content = content
+
+      const { vm } = this
+      document.body.appendChild(vm.$el)
+      Vue.nextTick(() => {
+        vm.visible = true
+      })
+
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+        this.reject = reject
+      })
+    }
+
+    createInstance() {
+      if (!this.vm) {
+        const component = this.createComponent()
+        const DialogCtor = Vue.extend(component)
+        this.vm = new DialogCtor().$mount()
       }
     }
 
-    if (!cache) {
-      destroy(vm)
-      vm = null
+    createComponent() {
+      const instance = this
+      return {
+        data() {
+          return {
+            visible: false
+          }
+        },
+        render(h) {
+          const { props, on } = resolveOptions(instance, this)
+          const { scopedSlots, children } = resolveSlots(instance, this)
+          return h(
+            'ElDialog',
+            {
+              props,
+              on,
+              scopedSlots
+            },
+            children
+          )
+        }
+      }
     }
   }
-
-  return new Promise((resolve, reject) => {
-    _resolve = resolve
-    _reject = reject
-
-    document.body.appendChild(vm.$el)
-    vm.$nextTick(() => {
-      vm.show()
-    })
-  })
 }
 
-export default function (Vue, options = {}) {
-  DialogCtor = Vue.extend(DialogDefinition)
-  globalOptions = options
-  Vue.prototype.$dialog = init
+Dialog.install = (Vue, options = {}) => {
+  const DialogClass = Dialog(Vue)
+  const dialog = new DialogClass(options)
+  Vue.prototype.$dialog = dialog.dialog.bind(dialog)
 }
