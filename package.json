@@ -46,7 +46,7 @@
   },
   "lint-staged": {
     "*.{js,vue,md}": [
-      "eslint --cache --fix"
+      "eslint --fix"
     ]
   }
 }
