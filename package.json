@@ -1,7 +1,7 @@
 {
   "name": "vue-element-dialog",
   "version": "0.1.1",
-  "description": "An imperative dialog for el-dialog component in element-ui based on Vue@2.x",
+  "description": "An imperative dialog for el-dialog component in element-ui based on vue@2.x",
   "main": "dist/VueElementDialog.umd.min.js",
   "module": "dist/VueElementDialog.umd.js",
   "files": [
