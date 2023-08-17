@@ -8,15 +8,13 @@ export default function Dialog(Vue) {
       this.createInstance()
     }
 
-    dialog(content, options) {
+    dialog(content, options = {}) {
       this.options = Object.assign({}, options, this.globalOptions)
       this.content = content
 
       const { vm } = this
       document.body.appendChild(vm.$el)
-      Vue.nextTick(() => {
-        vm.visible = true
-      })
+      vm.visible = true
 
       return new Promise((resolve, reject) => {
         this.resolve = resolve
