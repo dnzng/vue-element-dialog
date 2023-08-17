@@ -15,10 +15,18 @@ it('install', () => {
   expect(typeof vm.$dialog).toBe('function')
 })
 
-it('can receive an global options', () => {
+it('can receive a global options', () => {
   const globalOptions = { center: true }
   const instance = new DialogClass(globalOptions)
   expect(instance.globalOptions).toBe(globalOptions)
+})
+
+it('should reture an promise-based value', () => {
+  const instance = new DialogClass()
+  const returnedValue = instance.dialog({
+    render: (h) => h('div', 'test')
+  })
+  expect(returnedValue instanceof Promise).toBe(true)
 })
 
 describe('options', () => {
