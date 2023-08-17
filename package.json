@@ -24,7 +24,7 @@
     "imperative"
   ],
   "scripts": {
-    "dev": "vite --open dev",
+    "dev": "vite dev--open",
     "lint": "eslint --fix .",
     "postinstall": "simple-git-hooks"
   },
