@@ -58,15 +58,9 @@ describe('options', () => {
   it('can recieve a component with slot name', async () => {
     const instance = new DialogClass()
     const slotsContent = {
-      default: {
-        component: defaultSlot
-      },
-      title: {
-        component: titleSlot
-      },
-      footer: {
-        component: footerSlot
-      }
+      default: defaultSlot,
+      title: titleSlot,
+      footer: footerSlot
     }
     instance.dialog(slotsContent)
 

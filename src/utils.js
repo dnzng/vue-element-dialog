@@ -32,6 +32,11 @@ export function resolveSlots(instance, context) {
     Object
       .entries(content)
       .forEach(([key, value]) => {
+        if (!value.component) {
+          value = {
+            component: value
+          }
+        }
         const { propsData = {}, component } = value
         if (component) {
           const vnode = h(component, { props: propsData, on })

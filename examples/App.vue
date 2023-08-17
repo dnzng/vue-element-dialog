@@ -24,9 +24,7 @@ export default {
           }
         },
         title: {
-          component: {
-            render: (h) => h('div', 'This is title')
-          }
+          render: (h) => h('div', 'This is title')
         },
         footer: {
           component: {
