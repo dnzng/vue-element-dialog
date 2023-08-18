@@ -13,6 +13,7 @@ Vue.use(Dialog)
 /**
  * @vitest-environment jsdom
  */
+
 it('install', () => {
   const vm = new Vue()
   expect(typeof vm.$dialog).toBe('function')
