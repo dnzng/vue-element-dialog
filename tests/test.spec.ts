@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import Vue, { ComponentInstance, ComponentOptions } from 'vue'
+import { VNode } from 'vue/types/umd'
+import { NormalizedScopedSlot } from 'vue/types/vnode'
 import ElementUI from 'element-ui'
 import Dialog from '../src'
-import { VNode } from 'vue/types/umd'
 import { SingleSlotOptions } from '../src/types'
-import { NormalizedScopedSlot } from 'vue/types/vnode'
 
 const DialogClass = Dialog(Vue)
 Vue.use(ElementUI)
@@ -82,7 +82,7 @@ describe('options', () => {
     render: (h) => h('span', 'This is the footer slot.')
   }
 
-  it('should recieve an option-based component', async () => {
+  it('should recieve an options-based component', async () => {
     const instance = new DialogClass()
     instance.dialog(defaultSlot, { visible: true })
 
