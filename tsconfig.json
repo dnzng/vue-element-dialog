@@ -19,7 +19,7 @@
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts"
-, "src/vue.d.ts"  ],
+  ],
   "exclude": [
     "node_modules",
     "dist"
