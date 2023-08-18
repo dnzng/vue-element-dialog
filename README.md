@@ -5,9 +5,9 @@ An imperative [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in 
 ## Installation
 
 ```bash
-yarn add vue-element-dialog element-ui
-# or
 npm i vue-element-dialog element-ui
+# or pnpm
+pnpm add vue-element-dialog element-ui
 ```
 
 ## Usage
@@ -43,17 +43,23 @@ export default {
 
   methods: {
     onOpen() {
-      this.$dialog({
-        title: 'Hello',
-        content: MyComponent,
-        props: {
-          msg: 'Hello, Vue.js'
+      this.$dialog(
+        // Your component will be shown in the default slot of the el-dialog component.
+        MyComponent,
+        // props and events configuration for the el-dialog component
+        {
+          // props
+          visible: true,
+          title: 'Your Title',
+          // events
+          opened() {
+            console.log('has opened...')
+          }
         }
-      }).then((val) => {
-        console.log(val)  // OK
-      }).catch((err) => {
-        console.log(err) // NO
-      })
+      )
+        .then((value) => {
+          console.log(value)  // Follow or Like
+        })
     }
   }
 }
@@ -64,13 +70,13 @@ export default {
 
 ```html
 <template>
-  <div class="my-component">
-    <p>{{ msg }}</p>
+  <el-main>
+    <h1>Hello World</h1>
     <div>
-      <el-button type="primary" @click="onCancel">Cancel</el-button>
-      <el-button type="primary" @click="onConfirm">Confirm</el-button>
+      <el-button type="primary" @click="onLike">Like</el-button>
+      <el-button type="primary" @click="onFollow">Follow</el-button>
     </div>
-  </div>
+  </el-main>
 </template>
 
 <script>
@@ -81,11 +87,11 @@ export default {
     msg: String
   },
   methods: {
-    onCancel() {
-      this.$emit('cancel', 'NO')
+    onLike() {
+      this.$emit('close', 'Like')
     },
-    onConfirm() {
-      this.$emit('confirm', 'OK')
+    onFollow() {
+      this.$emit('close', 'Follow')
     }
   }
 }
@@ -94,50 +100,68 @@ export default {
 
 ## Options
 
-Support all attributes except `visible` on [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) and do not support `slot` and `events`.
+Support all of props, events and slots defined on the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog).
 
-### Special options
+### slots
 
-#### content
-Required: `true`<br>
-Type: `Object`<br>
-Default: `{}`
+There are three styles to be choosed.
 
-To display content in dialog.
-
-#### props
-Required: `false`<br>
-Type: `Object`<br>
-Default: `{}`
-
-Declared props data of content option.
-
-
-#### cache
-Required: `false`<br>
-Type: `Boolean`<br>
-Default: `false`
-
-Whether to cache el-dialog instance.
-
-
-#### callback(action, param1, ...)
-Required: `false`<br>
-Type: `Function`<br>
-
-Triggers when to execute an action. You can customize an action by associating with `this.$close()` while `resolve` and `reject` will be invalid. e.g:
+1. Directly passes your component to it, which will be shown in the default slot. e.g:
 
 ```js
-this.$emit('close', 'myAction', param1, param2, param3)
+this.$dialog(MainComponent)
 ```
 
-## Events
+2. Provides an object whose each pair of key-value represents a slot supported by `el-dialog`. e.g:
 
-You can invoke them in your component to execute an action for dialog while passing on some parameters.
+```js
+this.$dialog({
+  default: MainComponent,
+  title: TitleComponent,
+  footer: FooterComponent
+})
+```
 
-- `confirm`: a "confirm" action to resolve. e.g: `this.$emit('confirm', param1, ....)`
-- `cancel`: a "cancel" action to reject. e.g: `this.$emit('cancel', param1, ....)`
-- `close`: just close the current dialog, e.g: `this.$emit('close')`
+3. Similar to the second, but it supports the components with the props definition. 
+
+```js
+this.$dialog({
+  default: {
+    component: YourComponent,
+    propsData: {
+      msg: 'Follow and Like it.'
+    }
+  }
+})
+```
+
+### props and events
+
+The second parameter is uesd to configure all of props and events supported by `el-dialog`. e.g:
+
+```js
+this.$dialog(YourComponent, {
+  // props
+  visible: true,
+  title: 'your title',
+  // events
+  opened() {
+    console.log('has opened...')
+  }
+})
+```
+
+## Injected Event
+
+The plugin will inject an called `close` event into your component passed into the `el-dialog`, 
+so you could call it to close the current dialog and pass values to where you called it.
+
+Since the returned value is a promise-based value, you will be able to access the values 
+passed to the `close` event. 
+
+```js
+this.$emit('close', 'Follow and Like')
+```
 
 ## License
 
