@@ -1,30 +1,37 @@
-const SLOTS_NAMES = [
-  'default', 'title', 'footer'
-]
+import type { VNode, VNodeData } from 'vue'
+import type {
+  ResolvedOptions, EventOptions, DefaultFunction,
+  Dialog, DialogComponent, DialogComponentOptions
+} from './types'
+import { SLOTS_NAMES, VISIBLE_KEY } from './constant'
 
-function isComponent(obj) {
-  return obj._Ctor || !Object
-    .keys(obj)
+function isComponent(content: object) {
+  return !Object
+    .keys(content)
     .some(key => SLOTS_NAMES.includes(key))
 }
 
-export function resolveSlots(instance, context) {
+export function resolveSlots(
+  instance: Dialog,
+  vm: DialogComponent
+) {
   let { content } = instance
-  const scopedSlots = {}
-  const children = []
+  const scopedSlots: VNodeData['scopedSlots'] = {}
+  const children: VNode[] = []
 
   if (content) {
-    const h = instance.vm.$createElement
+    const resolve = instance.resolve as DefaultFunction
+    const h = vm.$createElement
     const on = {
-      close(...payload) {
-        context.visible = false
-        instance.resolve(...payload)
+      close(...payload: any[]) {
+        vm.visible = false
+        resolve(...payload)
       }
     }
     if (isComponent(content)) {
       content = {
         default: {
-          component: content,
+          component: content as DialogComponentOptions,
           propsData: {}
         }
       }
@@ -40,7 +47,7 @@ export function resolveSlots(instance, context) {
         const { propsData = {}, component } = value
         if (component) {
           const vnode = h(component, { props: propsData, on })
-          scopedSlots[key] = () => vnode
+          scopedSlots[key] = () => [vnode]
           // the footer slot will only be shown when vm.$slots.footer exists.
           if (key === 'footer') {
             children.push(h('template', { slot: key }, [vnode]))
@@ -52,28 +59,26 @@ export function resolveSlots(instance, context) {
   return { scopedSlots, children }
 }
 
-const VISIBLE_KEY = 'update:visible'
-export function resolveOptions(instance, context) {
+export function resolveOptions(
+  instance: Dialog,
+  vm: DialogComponent
+): ResolvedOptions {
   const { options: { open, opened, close, closed, ...props } } = instance
-  const on = {}
-  Object.entries({
-    open,
-    opened,
-    close,
-    closed
-  })
+  const on: VNodeData['on'] = {}
+  const events: EventOptions = { open, opened, close, closed }
+  Object.entries(events)
     .filter(([, value]) => value)
     .forEach(([key, value]) => (on[key] = value))
 
   return {
     props: {
       ...props,
-      visible: context.visible
+      visible: vm.visible
     },
     on: {
       ...on,
       [VISIBLE_KEY](value) {
-        context.visible = value
+        vm.visible = value
       }
     }
   }

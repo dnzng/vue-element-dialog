@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import Basic from './components/Basic.vue'
 import Nest from './components/Nest.vue'
 

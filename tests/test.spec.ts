@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import Vue from 'vue'
+import Vue, { ComponentOptions } from 'vue'
 import ElementUI from 'element-ui'
 import Dialog from '../src'
+import { VNode } from 'vue/types/umd'
+import { SingleSlotOptions } from '../src/types'
+import { NormalizedScopedSlot } from 'vue/types/vnode'
 
 const DialogClass = Dialog(Vue)
 Vue.use(ElementUI)
@@ -15,7 +18,7 @@ it('install', () => {
   expect(typeof vm.$dialog).toBe('function')
 })
 
-it('can receive a global options', () => {
+it('should receive a global options', () => {
   const globalOptions = { center: true }
   const instance = new DialogClass(globalOptions)
   expect(instance.globalOptions).toBe(globalOptions)
@@ -24,38 +27,38 @@ it('can receive a global options', () => {
 it('should reture an promise-based value', () => {
   const instance = new DialogClass()
   const returnedValue = instance.dialog({
-    render: (h) => h('div', 'test')
+    render: h => h('span', 'Promise')
   })
   expect(returnedValue instanceof Promise).toBe(true)
 })
 
 describe('options', () => {
-  const defaultSlot = {
+  const defaultSlot: ComponentOptions<Vue> = {
     name: 'slot-default',
     render: h => h('span', 'This is the default slot.')
   }
-  const titleSlot = {
+  const titleSlot: ComponentOptions<Vue> = {
     name: 'slot-title',
     render: (h) => h('span', 'This is the title slot.')
   }
-  const footerSlot = {
+  const footerSlot: ComponentOptions<Vue> = {
     name: 'slot-footer',
     render: (h) => h('span', 'This is the footer slot.')
   }
 
-  it('can recieve an option-based component', async () => {
+  it('should recieve an option-based component', async () => {
     const instance = new DialogClass()
     instance.dialog(defaultSlot)
 
     await Vue.nextTick()
 
     const { vm } = instance
-    const body = vm.$el.querySelector('.el-dialog__body')
+    const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body).not.toBeNull()
     expect(body.innerHTML).toBe('<span>This is the default slot.</span>')
   })
 
-  it('can recieve a component with slot name', async () => {
+  it('should recieve a component with slot name', async () => {
     const instance = new DialogClass()
     const slotsContent = {
       default: defaultSlot,
@@ -67,22 +70,23 @@ describe('options', () => {
     await Vue.nextTick()
 
     const { vm } = instance
-    const body = vm.$el.querySelector('.el-dialog__body')
+    const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body).not.toBeNull()
     expect(body.innerHTML).toBe('<span>This is the default slot.</span>')
 
-    const title = vm.$el.querySelector('.el-dialog__header')
+    const title = vm.$el.querySelector('.el-dialog__header') as HTMLDivElement
     expect(title).not.toBeNull()
-    expect(title.firstChild.outerHTML).toBe('<span>This is the title slot.</span>')
+    const firstChild = title.firstChild as HTMLSpanElement
+    expect(firstChild.outerHTML).toBe('<span>This is the title slot.</span>')
 
-    const footer = vm.$el.querySelector('.el-dialog__footer')
+    const footer = vm.$el.querySelector('.el-dialog__footer') as HTMLDivElement
     expect(footer).not.toBeNull()
     expect(footer.innerHTML).toBe('<span>This is the footer slot.</span>')
   })
 
-  it('can receive a component with props data', async () => {
+  it('should receive a component with props data', async () => {
     const instance = new DialogClass()
-    const defaultSlotWithPropsData = {
+    const defaultSlotWithPropsData: SingleSlotOptions = {
       propsData: {
         msg: 'Hello'
       },
@@ -94,7 +98,7 @@ describe('options', () => {
           }
         },
         render(h) {
-          return h('span', `The value of the msg prop is ${this.msg}.`)
+          return h('span', `The value of the msg prop is ${(this as any).msg}.`)
         }
       }
     }
@@ -104,7 +108,8 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const body = instance.vm.$el.querySelector('.el-dialog__body')
+    const { vm } = instance
+    const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body.innerHTML).toBe('<span>The value of the msg prop is Hello.</span>')
   })
 
@@ -114,10 +119,12 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const scopedSlots = instance.vm.$children[0].$scopedSlots
-    const vnode = scopedSlots.default()[0]
-    const vm = vnode.componentInstance
-    expect(vm.$listeners.close).not.toBeNull()
-    expect(typeof vm.$listeners.close).toBe('function')
+    const { vm } = instance
+    const scopedSlots = vm.$children[0].$scopedSlots
+    const defaultSlotFn = scopedSlots.default as NormalizedScopedSlot
+    const defaultSlotVnode = (defaultSlotFn('') as VNode[])[0]
+    const childVm = defaultSlotVnode.componentInstance as Vue
+    expect(childVm.$listeners.close).not.toBeNull()
+    expect(typeof childVm.$listeners.close).toBe('function')
   })
 })
