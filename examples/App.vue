@@ -22,7 +22,7 @@ export default {
         default: {
           component: Basic,
           propsData: {
-            msg: 'I am default content.'
+            msg: 'This is the default content.'
           }
         },
         title: {
@@ -43,9 +43,8 @@ export default {
 
     onNest() {
       this.$dialog(Nest, {
+        visible: true,
         title: 'Nest'
-      }, {
-        visible: true
       })
     }
   }
