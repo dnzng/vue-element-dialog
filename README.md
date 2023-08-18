@@ -1,8 +1,8 @@
 # vue-element-dialog
 
-An imperative [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x
+Provide an imperative [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x.
 
-## Installation
+## Install
 
 ```bash
 npm i vue-element-dialog element-ui
