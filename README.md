@@ -122,7 +122,7 @@ this.$dialog({
 })
 ```
 
-3. Similar to the second, but it supports the components with the props definition. 
+3. Similar to the second, but it supports the components with the props definition. e.g:
 
 ```js
 this.$dialog({
