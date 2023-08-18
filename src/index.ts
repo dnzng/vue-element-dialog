@@ -1,16 +1,15 @@
-import type { VueConstructor } from 'vue'
-import type {
-  UserOptions, ContentOptions,
-  DialogComponent, DialogComponentOptions,
-  DefaultFunction
-} from './types'
+import { ComponentInstance, CreateElement, VueConstructor } from 'vue'
+import type { UserOptions, ContentOptions, DefaultFunction, DComponentOptions } from './types'
 import { resolveOptions, resolveSlots } from './utils'
 
 export default function Dialog(Vue: VueConstructor) {
   return class Dialog {
     readonly globalOptions: UserOptions
     options: UserOptions
-    vm: DialogComponent
+
+    DialogCtor: VueConstructor
+    vm: ComponentInstance
+
     content?: ContentOptions | undefined
     resolve?: DefaultFunction | undefined
     reject?: DefaultFunction | undefined
@@ -18,7 +17,9 @@ export default function Dialog(Vue: VueConstructor) {
     constructor(options: UserOptions = {}) {
       this.globalOptions = options
       this.options = {}
-      this.vm = this.createVueInstance()
+      const component = this.createComponent()
+      const DialogCtor = this.DialogCtor = Vue.extend(component)
+      this.vm = new DialogCtor().$mount()
     }
 
     dialog(
@@ -34,7 +35,7 @@ export default function Dialog(Vue: VueConstructor) {
 
       const vm = this.vm
       document.body.appendChild(vm.$el)
-      vm.visible = true
+      vm.$data.visible = true
 
       return new Promise((resolve, reject) => {
         this.resolve = resolve
@@ -42,15 +43,7 @@ export default function Dialog(Vue: VueConstructor) {
       })
     }
 
-    createVueInstance(): DialogComponent {
-      if (this.vm) return this.vm
-
-      const component = this.createComponent()
-      const DialogCtor = Vue.extend(component)
-      return new DialogCtor().$mount()
-    }
-
-    createComponent(): DialogComponentOptions {
+    createComponent(): DComponentOptions {
       const instance = this
       return {
         data() {
@@ -58,7 +51,7 @@ export default function Dialog(Vue: VueConstructor) {
             visible: false
           }
         },
-        render(h) {
+        render(this: ComponentInstance, h: CreateElement) {
           const { props, on } = resolveOptions(instance, this)
           const { scopedSlots, children } = resolveSlots(instance, this)
           return h(

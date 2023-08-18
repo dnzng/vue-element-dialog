@@ -1,4 +1,5 @@
 <script lang="ts">
+import { CreateElement } from 'vue'
 import Basic from './components/Basic.vue'
 import Nest from './components/Nest.vue'
 
@@ -10,7 +11,7 @@ export default {
     onBasicOne() {
       this.$dialog(Basic, {
         title: 'Hello' + count++
-      }).then(value => {
+      }).then((value: string) => {
         console.log(value)
       })
     },
@@ -24,17 +25,17 @@ export default {
           }
         },
         title: {
-          render: (h) => h('div', 'This is title')
+          render: (h: CreateElement) => h('div', 'This is title')
         },
         footer: {
           component: {
-            render: (h) => h('div', 'This is footer')
+            render: (h: CreateElement) => h('div', 'This is footer')
           }
         }
       }, {
         title: 'Hello' + count++,
         visible: false
-      }).then(value => {
+      }).then((value: string) => {
         console.log(value)
       })
     },

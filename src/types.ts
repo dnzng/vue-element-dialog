@@ -1,5 +1,5 @@
+import Vue, { ComponentOptions, ComponentInstance, VueConstructor } from 'vue'
 import { VISIBLE_KEY } from './constant'
-import Vue, { ComponentOptions, Component, CreateElement, RenderContext, VNode } from 'vue'
 
 type DefaultRecord = Record<string, any>
 export type DefaultFunction = (...args: any[]) => void
@@ -33,43 +33,38 @@ export type EventOptions = {
 
 export type UserOptions = PropsOptions & EventOptions
 
-export type ResolvedOptions = {
+export interface ResolvedOptions {
   props?: PropsOptions
   on?: EventOptions
 }
 
-export type DialogComponent = Component & DefaultRecord
-export interface DialogComponentOptions extends ComponentOptions<Vue> {
-  render?(
-    this: DialogComponent,
-    createElement: CreateElement,
-    hack: RenderContext<DefaultRecord>
-  ): VNode | null | void
-}
-export type SingleSlotOptions = {
-  component: DialogComponentOptions
+export type DComponentOptions = ComponentOptions<Vue>
+export interface SingleSlotOptions {
+  component: DComponentOptions
   propsData?: DefaultRecord
 }
-type SlotOptions = DialogComponentOptions | SingleSlotOptions
-export type SlotsOptions = {
+type SlotOptions = DComponentOptions | SingleSlotOptions
+export interface SlotsOptions {
   default?: SlotOptions
   title?: SlotOptions
   footer?: SlotOptions
 }
-export type ContentOptions = DialogComponentOptions | SlotsOptions
+export type ContentOptions = DComponentOptions | SlotsOptions
 
-type DialogHandler = (content: ContentOptions, options?: UserOptions) => Promise<any>
+export interface DialogHandler {
+ (content: ContentOptions, options?: UserOptions): Promise<any>
+}
 export interface Dialog {
   readonly globalOptions: UserOptions
   options: UserOptions
-  vm: DialogComponent
+  DialogCtor: VueConstructor
+  vm: ComponentInstance
   content?: ContentOptions | undefined
   resolve?: DefaultFunction | undefined
   reject?: DefaultFunction | undefined
 
   dialog: DialogHandler
-  createVueInstance: () => DialogComponent
-  createComponent(): DialogComponentOptions
+  createComponent(): ContentOptions
 }
 
 declare module 'vue/types/vue' {

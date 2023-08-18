@@ -27,7 +27,9 @@ it('should receive a global options', () => {
 it('should reture an promise-based value', () => {
   const instance = new DialogClass()
   const returnedValue = instance.dialog({
-    render: h => h('span', 'Promise')
+    render(h) {
+      return h('div', 'text')
+    }
   })
   expect(returnedValue instanceof Promise).toBe(true)
 })
