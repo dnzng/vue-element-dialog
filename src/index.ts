@@ -1,15 +1,12 @@
-import { ComponentInstance, CreateElement, VueConstructor } from 'vue'
-import type { UserOptions, ContentOptions, DefaultFunction, DComponentOptions } from './types'
+import type { ComponentInstance, CreateElement, VueConstructor } from 'vue'
+import type { UserOptions, ContentOptions, DefaultFunction, VComponentOptions } from './types'
 import { resolveOptions, resolveSlots } from './utils'
 
 export default function Dialog(Vue: VueConstructor) {
   return class Dialog {
-    readonly globalOptions: UserOptions
+    globalOptions: UserOptions
     options: UserOptions
-
-    DialogCtor: VueConstructor
-    vm: ComponentInstance
-
+    vm: ComponentInstance | null
     content?: ContentOptions | undefined
     resolve?: DefaultFunction | undefined
     reject?: DefaultFunction | undefined
@@ -17,9 +14,7 @@ export default function Dialog(Vue: VueConstructor) {
     constructor(options: UserOptions = {}) {
       this.globalOptions = options
       this.options = {}
-      const component = this.createComponent()
-      const DialogCtor = this.DialogCtor = Vue.extend(component)
-      this.vm = new DialogCtor().$mount()
+      this.vm = null
     }
 
     dialog(
@@ -33,9 +28,13 @@ export default function Dialog(Vue: VueConstructor) {
       this.options = Object.assign({}, options, this.globalOptions)
       this.content = content
 
-      const vm = this.vm
+      if (!this.vm) {
+        this.vm = this.getInstance()
+      }
+
+      const vm = this.vm as ComponentInstance
       document.body.appendChild(vm.$el)
-      vm.$data.visible = true
+      vm.$data.visible = this.options.visible
 
       return new Promise((resolve, reject) => {
         this.resolve = resolve
@@ -43,7 +42,13 @@ export default function Dialog(Vue: VueConstructor) {
       })
     }
 
-    createComponent(): DComponentOptions {
+    getInstance(): ComponentInstance {
+      const component = this.createComponent()
+      const DialogCtor = Vue.extend(component)
+      return new DialogCtor().$mount()
+    }
+
+    createComponent(): VComponentOptions {
       const instance = this
       return {
         data() {
@@ -63,8 +68,25 @@ export default function Dialog(Vue: VueConstructor) {
             },
             children
           )
+        },
+        // only used to test
+        destroyed() {
+          console.log('destroyed')
         }
       }
+    }
+
+    destroy() {
+      const { vm } = this
+      if (!vm) return true
+      // remove vm.$el
+      if (vm.$el && vm.$el.parentNode) {
+        vm.$el.parentNode.removeChild(vm.$el)
+      }
+      // recursively destroy component instances
+      vm.$destroy()
+      // reset properties
+      this.vm = null
     }
   }
 }

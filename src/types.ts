@@ -1,4 +1,4 @@
-import Vue, { ComponentOptions, ComponentInstance, VueConstructor } from 'vue'
+import Vue, { ComponentOptions, ComponentInstance } from 'vue'
 import { VISIBLE_KEY } from './constant'
 
 type DefaultRecord = Record<string, any>
@@ -38,33 +38,34 @@ export interface ResolvedOptions {
   on?: EventOptions
 }
 
-export type DComponentOptions = ComponentOptions<Vue>
+export type VComponentOptions = ComponentOptions<Vue>
 export interface SingleSlotOptions {
-  component: DComponentOptions
+  component: VComponentOptions
   propsData?: DefaultRecord
 }
-type SlotOptions = DComponentOptions | SingleSlotOptions
+type SlotOptions = VComponentOptions | SingleSlotOptions
 export interface SlotsOptions {
   default?: SlotOptions
   title?: SlotOptions
   footer?: SlotOptions
 }
-export type ContentOptions = DComponentOptions | SlotsOptions
+export type ContentOptions = VComponentOptions | SlotsOptions
 
 export interface DialogHandler {
  (content: ContentOptions, options?: UserOptions): Promise<any>
 }
 export interface Dialog {
-  readonly globalOptions: UserOptions
+  globalOptions: UserOptions
   options: UserOptions
-  DialogCtor: VueConstructor
-  vm: ComponentInstance
+  vm: ComponentInstance | null
   content?: ContentOptions | undefined
   resolve?: DefaultFunction | undefined
   reject?: DefaultFunction | undefined
 
   dialog: DialogHandler
+  getInstance(): ComponentInstance
   createComponent(): ContentOptions
+  destroy(): void
 }
 
 declare module 'vue/types/vue' {

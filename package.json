@@ -33,7 +33,9 @@
     "postinstall": "simple-git-hooks"
   },
   "peerDependencies": {
-    "element-ui": ">=2.12.0"
+    "element-ui": ">=2.12.0",
+    "vue": ">=2.6",
+    "vue-router": ">=3.x"
   },
   "devDependencies": {
     "@dnzng/eslint-config": "^0.1.4",

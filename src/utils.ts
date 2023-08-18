@@ -1,7 +1,7 @@
 import type { ComponentInstance, VNode, VNodeData } from 'vue'
 import type {
   ResolvedOptions, EventOptions, DefaultFunction,
-  Dialog, DComponentOptions
+  Dialog, VComponentOptions
 } from './types'
 import { SLOTS_NAMES, VISIBLE_KEY } from './constant'
 
@@ -31,7 +31,7 @@ export function resolveSlots(
     if (isComponent(content)) {
       content = {
         default: {
-          component: content as DComponentOptions,
+          component: content as VComponentOptions,
           propsData: {}
         }
       }

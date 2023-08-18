@@ -10,6 +10,7 @@ export default {
   methods: {
     onBasicOne() {
       this.$dialog(Basic, {
+        visible: true,
         title: 'Hello' + count++
       }).then((value: string) => {
         console.log(value)
@@ -33,8 +34,8 @@ export default {
           }
         }
       }, {
-        title: 'Hello' + count++,
-        visible: false
+        visible: true,
+        title: 'Hello' + count++
       }).then((value: string) => {
         console.log(value)
       })
@@ -43,6 +44,8 @@ export default {
     onNest() {
       this.$dialog(Nest, {
         title: 'Nest'
+      }, {
+        visible: true
       })
     }
   }
