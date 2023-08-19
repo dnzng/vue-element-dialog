@@ -1,6 +1,6 @@
 # vue-element-dialog
 
-Provide an imperative [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x.
+Provides an imperative call to the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) component in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x.
 
 ## Install
 
@@ -100,19 +100,19 @@ export default {
 
 ## Options
 
-Support all of props, events and slots defined on the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog).
+Supports all of the props, events and slots defined on the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) componenet.
 
 ### slots
 
-There are three styles to be choosed.
+There are three ways to be chosen from.
 
-1. Directly passes your component to it, which will be shown in the default slot. e.g:
+1. Directly passes your component, which will be shown in the default slot. e.g.
 
 ```js
 this.$dialog(MainComponent)
 ```
 
-2. Provides an object whose each pair of key-value represents a slot supported by `el-dialog`. e.g:
+2. Provides an object where each key-value pair represents a slot supported by `el-dialog`. e.g.
 
 ```js
 this.$dialog({
@@ -122,7 +122,7 @@ this.$dialog({
 })
 ```
 
-3. Similar to the second, but it supports the components with the props definition. e.g:
+3. Similar to the second approach, but it supports the components with the `props` definitions. e.g.
 
 ```js
 this.$dialog({
@@ -137,7 +137,7 @@ this.$dialog({
 
 ### props and events
 
-The second parameter is uesd to configure all of props and events supported by `el-dialog`. e.g:
+The second parameter is uesd to configure all of the props and events supported by `el-dialog`. e.g.
 
 ```js
 this.$dialog(YourComponent, {
@@ -153,11 +153,11 @@ this.$dialog(YourComponent, {
 
 ## Injected Event
 
-The plugin will inject an called `close` event into your component passed into the `el-dialog`, 
-so you could call it to close the current dialog and pass values to where you called it.
+The plugin will inject a called `close` event into your component passed to the `el-dialog`. 
+You can call it to close the current opened dialog and provide some values as the value of a fullfiled Promise.
 
-Since the returned value is a promise-based value, you will be able to access the values 
-passed to the `close` event. 
+Since the returned value is a promise-based, you will be able to access the values 
+passed to the `close` event.
 
 ```js
 this.$emit('close', 'Follow and Like')
