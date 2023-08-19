@@ -153,14 +153,14 @@ this.$dialog(YourComponent, {
 
 ## Injected Event
 
-The plugin will inject a called `close` event into your component passed to the `el-dialog`. 
-You can call it to close the current opened dialog and provide some values as the value of a fullfiled Promise.
+The plugin will inject a called `close` event into your component passed to the `el-dialog`. You can call it to close the current opened dialog and pass some values. The eventual state of the promise returned by calling `this.$dialog` will become resolved when calling the `close` event, so you will be able to access the values passed to the `close` event.
 
-Since the returned value is a promise-based, you will be able to access the values 
-passed to the `close` event.
+Note that due to the limitations of the `resolve` method, the type of the resolved value will vary depending on the number of arguments you pass to the `this.$emit('close', ...)`. The value is `undefined` if you don't pass anything. The value is itself if you pass one. The value is an array of them if you pass more than one. e.g.
 
 ```js
-this.$emit('close', 'Follow and Like')
+this.$emit('close') // the value is `undefined`
+this.$emit('close', { foo: 1 }) // the value is itself
+this.$emit('close', 'Follow', { number: 99 }) // the value is an array of them.
 ```
 
 ## License
