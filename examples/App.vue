@@ -11,7 +11,7 @@ export default {
     onBasicOne() {
       this.$dialog(Basic, {
         visible: true,
-        title: 'Hello' + count++
+        title: `Hello x ${count++}`
       }).then((value: string) => {
         console.log(value)
       })
@@ -34,9 +34,8 @@ export default {
           }
         }
       }, {
-        visible: true,
-        title: 'Hello' + count++
-      }).then((value: string) => {
+        visible: true
+      }).then((value: string | any[]) => {
         console.log(value)
       })
     },

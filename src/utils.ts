@@ -23,9 +23,13 @@ export function resolveSlots(
     const resolve = instance.resolve as DefaultFunction
     const h = vm.$createElement
     const on = {
-      close(...payload: any[]) {
+      close(...args: any[]) {
         vm.$data.visible = false
-        resolve(...payload)
+        let value
+        if (args.length === 0) value = undefined
+        else if (args.length === 1) value = args[0]
+        else value = args
+        resolve(value)
       }
     }
     if (isComponent(content)) {

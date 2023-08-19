@@ -7,13 +7,13 @@ export default {
   },
 
   methods: {
-    onCancel() {
+    onLike() {
       // eslint-disable-next-line
-      this.$emit('close', 'NO')
+      this.$emit('close', 'Like')
     },
-    onConfirm() {
+    onFollow() {
       // eslint-disable-next-line
-      this.$emit('close', 'OK')
+      this.$emit('close', 'Follow', 'I has already followed')
     }
   }
 }
@@ -25,11 +25,11 @@ export default {
       {{ msg }}
     </div>
     <div class="btn-wrap">
-      <el-button @click="onCancel">
-        Cancel
+      <el-button @click="onLike">
+        Like
       </el-button>
-      <el-button type="primary" @click="onConfirm">
-        Confirm
+      <el-button type="primary" @click="onFollow">
+        Follow
       </el-button>
     </div>
   </div>
