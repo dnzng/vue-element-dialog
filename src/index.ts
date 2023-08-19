@@ -79,7 +79,7 @@ export default function Dialog(Vue: VueConstructor) {
     destroy() {
       const { vm } = this
       if (!vm) return true
-      // remove vm.$el
+      // remove vm.$el from document.body
       if (vm.$el && vm.$el.parentNode) {
         vm.$el.parentNode.removeChild(vm.$el)
       }
@@ -87,6 +87,7 @@ export default function Dialog(Vue: VueConstructor) {
       vm.$destroy()
       // reset properties
       this.vm = null
+      return true
     }
   }
 }
