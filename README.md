@@ -36,7 +36,7 @@ Vue.use(VueElementDialog, { center: true })
 </template>
 
 <script>
-import MyComponent from 'path/to/MyComponent.vue'
+import YourComponent from 'path/to/YourComponent.vue'
 
 export default {
   name: 'App',
@@ -45,7 +45,7 @@ export default {
     onOpen() {
       this.$dialog(
         // Your component will be shown in the default slot of the el-dialog component.
-        MyComponent,
+        YourComponent,
         // props and events configuration for the el-dialog component
         {
           // props
@@ -66,12 +66,12 @@ export default {
 </script>
 ```
 
-`MyComponent.vue`:
+`YourComponent.vue`:
 
 ```html
 <template>
   <el-main>
-    <h1>Hello World</h1>
+    <h1>Hi</h1>
     <div>
       <el-button type="primary" @click="onLike">Like</el-button>
       <el-button type="primary" @click="onFollow">Follow</el-button>
@@ -81,7 +81,7 @@ export default {
 
 <script>
 export default {
-  name: 'MyComponent',
+  name: 'YourComponent',
 
   props: {
     msg: String
@@ -127,7 +127,7 @@ this.$dialog({
 ```js
 this.$dialog({
   default: {
-    component: YourComponent,
+    component: MainComponent,
     propsData: {
       msg: 'Follow and Like it.'
     }
