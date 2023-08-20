@@ -159,8 +159,8 @@ Note that due to the limitations of the `resolve` method, the type of the resolv
 
 ```js
 this.$emit('close') // the value is `undefined`
-this.$emit('close', { foo: 1 }) // the value is itself
-this.$emit('close', 'Follow', { number: 99 }) // the value is an array of them.
+this.$emit('close', { foo: 1 }) // the value is `{ foo: 1 }`
+this.$emit('close', 'Follow', { number: 99 }) // the value is `['Follow', { number: 99 }]`
 ```
 
 ## License
