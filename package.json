@@ -35,8 +35,7 @@
     "release": "bumpp && pnpm publish",
     "typecheck": "tsc --incremental --noEmit",
     "test": "vitest",
-    "lint": "eslint .",
-    "postinstall": "simple-git-hooks"
+    "lint": "eslint ."
   },
   "peerDependencies": {
     "element-ui": ">=2.12.0",
