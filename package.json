@@ -33,7 +33,7 @@
     "build": "tsup",
     "prepublishOnly": "pnpm build",
     "release": "bumpp && npm publish",
-    "typecheck": "tsc --incremental --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "vitest",
     "lint": "eslint ."
   },
