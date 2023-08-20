@@ -25,7 +25,7 @@ export default function Dialog(Vue: VueConstructor) {
         return Promise.reject(new Error('The content shown in \'el-dialog\' component cannot be empty'))
       }
 
-      this.options = Object.assign({}, options, this.globalOptions)
+      this.options = Object.assign({}, this.globalOptions, options)
       this.content = content
 
       if (!this.vm) {
