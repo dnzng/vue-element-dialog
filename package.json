@@ -1,6 +1,6 @@
 {
   "name": "vue-element-dialog",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An imperative dialog for el-dialog component in element-ui based on Vue@2.x",
   "packageManager": "pnpm@8.6.5",
   "engines": {
