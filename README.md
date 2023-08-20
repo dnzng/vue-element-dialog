@@ -1,4 +1,4 @@
-# vue-element-dialog [![npm](https://img.shields.io/npm/v/vue-element-dialog.svg)](https://www.npmjs.com/package/vue-element-dialog)
+# vue-element-dialog [![npm](https://img.shields.io/npm/v/vue-element-dialog.svg)](https://www.npmjs.com/package/vue-element-dialog) [![build status](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml)
 
 Provides an imperative call to the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) component in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x.
 
