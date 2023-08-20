@@ -32,7 +32,7 @@
     "dev": "vite dev --open",
     "build": "tsup",
     "prepublishOnly": "pnpm build",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp && npm publish",
     "typecheck": "tsc --incremental --noEmit",
     "test": "vitest",
     "lint": "eslint ."
