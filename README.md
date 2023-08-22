@@ -1,4 +1,8 @@
-# vue-element-dialog [![npm](https://img.shields.io/npm/v/vue-element-dialog.svg)](https://www.npmjs.com/package/vue-element-dialog) [![build status](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml)
+# vue-element-dialog 
+
+[![npm](https://img.shields.io/npm/v/vue-element-dialog.svg)](https://www.npmjs.com/package/vue-element-dialog) 
+[![build status](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dnzng/vue-element-dialog/actions/workflows/ci.yml)
+[![download](https://img.shields.io/npm/dm/vue-element-dialog)](https://www.npmjs.com/package/vue-element-dialog)
 
 Provides an imperative call to the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) component in [element-ui](https://element.eleme.cn/#/en-US) based on vue@2.x.
 
@@ -100,7 +104,7 @@ export default {
 
 ## Options
 
-Supports all of the props, events and slots defined on the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) componenet.
+Supports all of the props, events and slots defined on the [el-dialog](https://element.eleme.cn/#/en-US/component/dialog) component.
 
 ### slots
 
@@ -122,7 +126,7 @@ this.$dialog({
 })
 ```
 
-3. Similar to the second way, but it supports the components that has the `props` option and need the `props` data. e.g.
+3. Similar to the second way, it supports the components that have the `props`` option and need the `props` data. e.g.
 
 ```js
 this.$dialog({
@@ -137,7 +141,7 @@ this.$dialog({
 
 ### props and events
 
-The second parameter is uesd to configure all of the props and events supported by `el-dialog`. e.g.
+The second parameter is used to configure all of the props and events supported by `el-dialog`. e.g.
 
 ```js
 this.$dialog(YourComponent, {
@@ -155,7 +159,7 @@ this.$dialog(YourComponent, {
 
 The plugin will inject a called `close` event into your component passed to the `el-dialog`. You can call it to close the current opened dialog and pass some values. The eventual state of the promise returned by calling `this.$dialog` will become resolved when calling the `close` event, so you will be able to access the values passed to the `close` event.
 
-Note that due to the limitations of the `resolve` method, the type of the resolved value will vary depending on the number of arguments you pass to the `this.$emit('close', ...)`. The value is `undefined` if you don't pass anything. The value is the argument itself if you pass one. The value is an array of the arguments if you pass more than one. e.g.
+Note that due to the limitations of the `resolve` method, the type of the resolved value will vary depending on the number of arguments you pass to this `$emit('close', ...)`. The value is `undefined` if you don't pass anything. The value is the argument itself if you pass one. The value is an array of arguments if you pass more than one. e.g.
 
 ```js
 this.$emit('close') // the value is `undefined`
