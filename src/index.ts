@@ -74,7 +74,7 @@ export default function Dialog(Vue: VueConstructor) {
           )
         }
       }
-      // avoid that the data and render options be overrided.
+      // avoid that the data and render options are overrided.
       return Object.assign({}, this.rootOptions, options)
     }
 
