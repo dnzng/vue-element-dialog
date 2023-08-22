@@ -35,8 +35,12 @@ it('should reture a promise-based value', () => {
   expect(returnedValue instanceof Promise).toBe(true)
 })
 
-it('should destroy and re-create', async () => {
-  const instance = new DialogClass()
+it('should destroy and recreate', async () => {
+  const instance = new DialogClass({}, {
+    destroyed() {
+      console.log('hooks: destroyed')
+    }
+  })
   const run = () => {
     instance.dialog({
       render(h) {
@@ -55,7 +59,7 @@ it('should destroy and re-create', async () => {
     str += msg
   }
   instance.destroy()
-  expect(str).toBe('destroyed')
+  expect(str).toBe('hooks: destroyed')
   expect(instance.vm).toBeNull()
 
   // re-create

@@ -5,27 +5,31 @@ import { resolveOptions, resolveSlots } from './utils'
 export default function Dialog(Vue: VueConstructor) {
   return class Dialog {
     globalOptions: UserOptions
+    rootOptions: VComponentOptions
     options: UserOptions
-    vm: ComponentInstance | null
-    content?: ContentOptions | undefined
-    resolve?: DefaultFunction | undefined
-    reject?: DefaultFunction | undefined
+    vm?: ComponentInstance | null
+    content?: ContentOptions
+    resolve?: DefaultFunction
+    reject?: DefaultFunction
 
-    constructor(options: UserOptions = {}) {
-      this.globalOptions = options
+    constructor(
+      globalOptions?: UserOptions,
+      rootOptions?: VComponentOptions
+    ) {
+      this.globalOptions = globalOptions || {}
+      this.rootOptions = rootOptions || {}
       this.options = {}
-      this.vm = null
     }
 
     dialog(
       content: ContentOptions,
-      options: UserOptions = {}
+      userOptions: UserOptions = {}
     ): Promise<any> {
       if (!content || typeof content !== 'object' || !Object.keys(content).length) {
         return Promise.reject(new Error('The content shown in \'el-dialog\' component cannot be empty'))
       }
 
-      this.options = Object.assign({}, this.globalOptions, options)
+      this.options = Object.assign({}, this.globalOptions, userOptions)
       this.content = content
 
       if (!this.vm) {
@@ -50,7 +54,7 @@ export default function Dialog(Vue: VueConstructor) {
 
     createComponent(): VComponentOptions {
       const instance = this
-      return {
+      const options: VComponentOptions = {
         data() {
           return {
             visible: false
@@ -68,12 +72,10 @@ export default function Dialog(Vue: VueConstructor) {
             },
             children
           )
-        },
-        // only used to test
-        destroyed() {
-          console.log('destroyed')
         }
       }
+      // avoid that the data and render options be overrided.
+      return Object.assign({}, this.rootOptions, options)
     }
 
     destroy() {
@@ -92,8 +94,8 @@ export default function Dialog(Vue: VueConstructor) {
   }
 }
 
-Dialog.install = (Vue: VueConstructor, options: UserOptions = {}) => {
+Dialog.install = (Vue: VueConstructor, globalOptions?: UserOptions) => {
   const DialogClass = Dialog(Vue)
-  const dialog = new DialogClass(options)
+  const dialog = new DialogClass(globalOptions)
   Vue.prototype.$dialog = dialog.dialog.bind(dialog)
 }

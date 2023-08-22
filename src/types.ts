@@ -1,7 +1,6 @@
 import Vue, { ComponentOptions, ComponentInstance } from 'vue'
 import { VISIBLE_KEY } from './constant'
 
-type DefaultRecord = Record<string, any>
 export type DefaultFunction = (...args: any[]) => void
 
 type PropsOptions = {
@@ -41,7 +40,7 @@ export interface ResolvedOptions {
 export type VComponentOptions = ComponentOptions<Vue>
 export interface SingleSlotOptions {
   component: VComponentOptions
-  propsData?: DefaultRecord
+  propsData?: Record<string, any>
 }
 type SlotOptions = VComponentOptions | SingleSlotOptions
 export interface SlotsOptions {
@@ -56,11 +55,12 @@ export interface DialogHandler {
 }
 export interface Dialog {
   globalOptions: UserOptions
+  rootOptions: VComponentOptions
   options: UserOptions
-  vm: ComponentInstance | null
-  content?: ContentOptions | undefined
-  resolve?: DefaultFunction | undefined
-  reject?: DefaultFunction | undefined
+  vm?: ComponentInstance | null
+  content?: ContentOptions
+  resolve?: DefaultFunction
+  reject?: DefaultFunction
 
   dialog: DialogHandler
   getInstance(): ComponentInstance
