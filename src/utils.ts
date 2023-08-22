@@ -1,8 +1,5 @@
 import type { ComponentInstance, VNode, VNodeData } from 'vue'
-import type {
-  ResolvedOptions, EventOptions, DefaultFunction,
-  Dialog, VComponentOptions
-} from './types'
+import type { ResolvedOptions, EventOptions, DialogInstance, VComponentOptions } from './types'
 import { SLOTS_NAMES, VISIBLE_KEY } from './constant'
 
 function isComponent(content: object) {
@@ -12,7 +9,7 @@ function isComponent(content: object) {
 }
 
 export function resolveSlots(
-  instance: Dialog,
+  instance: DialogInstance,
   vm: ComponentInstance
 ) {
   let { content } = instance
@@ -20,7 +17,7 @@ export function resolveSlots(
   const children: VNode[] = []
 
   if (content) {
-    const resolve = instance.resolve as DefaultFunction
+    const resolve = instance.resolve!
     const h = vm.$createElement
     const on = {
       close(...args: any[]) {
@@ -64,7 +61,7 @@ export function resolveSlots(
 }
 
 export function resolveOptions(
-  instance: Dialog,
+  instance: DialogInstance,
   vm: ComponentInstance
 ): ResolvedOptions {
   const { options: { open, opened, close, closed, ...props } } = instance

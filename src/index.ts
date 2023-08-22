@@ -4,8 +4,8 @@ import { resolveOptions, resolveSlots } from './utils'
 
 export default function Dialog(Vue: VueConstructor) {
   return class Dialog {
-    globalOptions: UserOptions
-    rootOptions: VComponentOptions
+    readonly globalOptions: UserOptions
+    readonly rootOptions: VComponentOptions
     options: UserOptions
     vm?: ComponentInstance | null
     content?: ContentOptions
@@ -36,7 +36,7 @@ export default function Dialog(Vue: VueConstructor) {
         this.vm = this.getInstance()
       }
 
-      const vm = this.vm as ComponentInstance
+      const vm = this.vm
       document.body.appendChild(vm.$el)
       vm.$data.visible = this.options.visible
 

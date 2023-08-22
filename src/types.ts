@@ -53,7 +53,7 @@ export type ContentOptions = VComponentOptions | SlotsOptions
 export interface DialogHandler {
  (content: ContentOptions, options?: UserOptions): Promise<any>
 }
-export interface Dialog {
+export interface DialogInstance {
   globalOptions: UserOptions
   rootOptions: VComponentOptions
   options: UserOptions

@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Vue, { ComponentInstance, ComponentOptions } from 'vue'
-import { VNode } from 'vue/types/umd'
-import { NormalizedScopedSlot } from 'vue/types/vnode'
+import Vue, { ComponentOptions } from 'vue'
 import ElementUI from 'element-ui'
 import Dialog from '../src'
 import { SingleSlotOptions } from '../src/types'
@@ -65,7 +63,7 @@ it('should destroy and recreate', async () => {
   // re-create
   run()
   await Vue.nextTick()
-  const vm = instance.vm as ComponentInstance
+  const vm = instance.vm!
   const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
   expect(body).not.toBeNull()
   expect(body.innerHTML).toBe('<span>test</span>')
@@ -92,7 +90,7 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const vm = instance.vm as ComponentInstance
+    const vm = instance.vm!
     const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body).not.toBeNull()
     expect(body.innerHTML).toBe('<span>This is the default slot.</span>')
@@ -109,7 +107,7 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const vm = instance.vm as ComponentInstance
+    const vm = instance.vm!
     const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body).not.toBeNull()
     expect(body.innerHTML).toBe('<span>This is the default slot.</span>')
@@ -148,7 +146,7 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const vm = instance.vm as ComponentInstance
+    const vm = instance.vm!
     const body = vm.$el.querySelector('.el-dialog__body') as HTMLDivElement
     expect(body.innerHTML).toBe('<span>The value of the msg prop is Hello.</span>')
   })
@@ -159,11 +157,11 @@ describe('options', () => {
 
     await Vue.nextTick()
 
-    const vm = instance.vm as ComponentInstance
+    const vm = instance.vm!
     const scopedSlots = vm.$children[0].$scopedSlots
-    const defaultSlotFn = scopedSlots.default as NormalizedScopedSlot
-    const defaultSlotVnode = (defaultSlotFn('') as VNode[])[0]
-    const childVm = defaultSlotVnode.componentInstance as Vue
+    const defaultSlotFn = scopedSlots.default!
+    const defaultSlotVnode = defaultSlotFn('')![0]
+    const childVm = defaultSlotVnode.componentInstance!
     expect(childVm.$listeners.close).not.toBeNull()
     expect(typeof childVm.$listeners.close).toBe('function')
   })
