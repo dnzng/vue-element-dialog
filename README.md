@@ -104,7 +104,7 @@ Supports all of the props, events and slots defined on the [el-dialog](https://e
 
 ### slots
 
-There are three ways to be chosen from.
+There are three ways of defining slots to be chosen from.
 
 1. Directly passes your component, which will be shown in the default slot. e.g.
 
