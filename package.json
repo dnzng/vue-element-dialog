@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "dev": "vite dev --open",
-    "build": "unbuild",
+    "build": "tsup",
     "prepublishOnly": "pnpm build",
     "release": "bumpp && npm publish",
     "typecheck": "tsc --noEmit",
