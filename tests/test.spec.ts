@@ -60,7 +60,7 @@ it('should destroy and recreate', async () => {
   expect(str).toBe('hooks: destroyed')
   expect(instance.vm).toBeNull()
 
-  // re-create
+  // recreate
   run()
   await Vue.nextTick()
   const vm = instance.vm!
