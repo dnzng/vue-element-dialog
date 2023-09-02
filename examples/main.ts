@@ -2,7 +2,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import App from './App.vue'
 import VueElementDialog from '../src'
-// import VueElementDialog from '../dist/index.js'
+// import VueElementDialog from '../dist/index.mjs'
 
 import './styles/index.css'
 import 'element-ui/lib/theme-chalk/index.css'

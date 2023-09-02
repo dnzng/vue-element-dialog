@@ -1,7 +1,7 @@
 {
   "name": "vue-element-dialog",
   "version": "1.0.4",
-  "description": "An imperative dialog for the el-dialog component in element-ui based on Vue@2.x",
+  "description": "An imperative call to the el-dialog component in element-ui based on Vue@2.x",
   "packageManager": "pnpm@8.6.5",
   "engines": {
     "node": ">=16"
@@ -29,8 +29,8 @@
     "imperative"
   ],
   "scripts": {
-    "dev": "vite dev --open",
     "build": "unbuild",
+    "example": "vite dev --open",
     "prepublishOnly": "pnpm build",
     "release": "bumpp && npm publish",
     "typecheck": "tsc --noEmit",
