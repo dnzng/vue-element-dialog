@@ -29,6 +29,7 @@ export function resolveSlots(
         resolve(value)
       }
     }
+
     if (isComponent(content)) {
       content = {
         default: {
@@ -37,6 +38,7 @@ export function resolveSlots(
         }
       }
     }
+
     Object
       .entries(content)
       .forEach(([key, value]) => {
@@ -67,6 +69,7 @@ export function resolveOptions(
   const { options: { open, opened, close, closed, ...props } } = instance
   const on: VNodeData['on'] = {}
   const events: EventOptions = { open, opened, close, closed }
+
   Object.entries(events)
     .filter(([, value]) => value)
     .forEach(([key, value]) => (on[key] = value))

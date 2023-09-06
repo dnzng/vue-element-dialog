@@ -26,7 +26,7 @@ export default function Dialog(Vue: VueConstructor) {
       userOptions: UserOptions = {}
     ): Promise<any> {
       if (!content || typeof content !== 'object' || !Object.keys(content).length) {
-        return Promise.reject(new Error('The content shown in \'el-dialog\' component cannot be empty'))
+        throw new Error('The content shown in \'el-dialog\' component cannot be empty')
       }
 
       this.options = Object.assign({}, this.globalOptions, userOptions)
@@ -49,7 +49,8 @@ export default function Dialog(Vue: VueConstructor) {
     getInstance(): ComponentInstance {
       const component = this.createComponent()
       const DialogCtor = Vue.extend(component)
-      return new DialogCtor().$mount()
+      const vm = new DialogCtor().$mount()
+      return vm
     }
 
     createComponent(): VComponentOptions {
@@ -74,7 +75,7 @@ export default function Dialog(Vue: VueConstructor) {
           )
         }
       }
-      // avoid that the data and render options are overrided.
+      // avoid that the data and render options are overrided by user's rootOptions.
       return Object.assign({}, this.rootOptions, options)
     }
 
