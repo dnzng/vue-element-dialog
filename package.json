@@ -42,7 +42,7 @@
     "vue": ">=2.6 <3.0.0"
   },
   "devDependencies": {
-    "@dnzng/eslint-config": "^0.1.7",
+    "@dnzng/eslint-config": "^0.1.8",
     "@vitejs/plugin-vue2": "^2.2.0",
     "bumpp": "^9.1.1",
     "element-ui": "^2.15.13",
