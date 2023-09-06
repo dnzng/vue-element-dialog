@@ -2,23 +2,20 @@ import type { ComponentInstance, CreateElement, VueConstructor } from 'vue'
 import type { UserOptions, ContentOptions, DefaultFunction, VComponentOptions } from './types'
 import { resolveOptions, resolveSlots } from './utils'
 
-export default function Dialog(Vue: VueConstructor) {
+function Dialog(Vue: VueConstructor) {
   return class Dialog {
-    readonly globalOptions: UserOptions
-    readonly rootOptions: VComponentOptions
-    options: UserOptions
-    vm?: ComponentInstance | null
-    content?: ContentOptions
-    resolve?: DefaultFunction
-    reject?: DefaultFunction
+    public options: UserOptions
+    public content: ContentOptions
+    public vm: ComponentInstance | null = null
+    public resolve?: DefaultFunction
+    public reject?: DefaultFunction
 
     constructor(
-      globalOptions?: UserOptions,
-      rootOptions?: VComponentOptions
+      public readonly globalOptions: UserOptions = {},
+      public readonly rootOptions: VComponentOptions = {}
     ) {
-      this.globalOptions = globalOptions || {}
-      this.rootOptions = rootOptions || {}
       this.options = {}
+      this.content = {}
     }
 
     dialog(
@@ -100,3 +97,5 @@ Dialog.install = (Vue: VueConstructor, globalOptions?: UserOptions) => {
   const dialog = new DialogClass(globalOptions)
   Vue.prototype.$dialog = dialog.dialog.bind(dialog)
 }
+
+export default Dialog
