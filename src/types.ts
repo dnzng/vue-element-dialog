@@ -1,5 +1,6 @@
-import Vue, { ComponentOptions, ComponentInstance } from 'vue'
-import { VISIBLE_KEY } from './constant'
+import type Vue from 'vue'
+import type { ComponentOptions, ComponentInstance } from 'vue'
+import type { VISIBLE_KEY } from './constant'
 
 export type DefaultFunction = (...args: any[]) => void
 
