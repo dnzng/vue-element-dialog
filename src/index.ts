@@ -23,7 +23,7 @@ function Dialog(Vue: VueConstructor) {
       userOptions: UserOptions = {}
     ): Promise<any> {
       if (!content || typeof content !== 'object' || !Object.keys(content).length) {
-        throw new Error('The content shown in \'el-dialog\' component cannot be empty')
+        throw new Error('[vue-element-dialog]: The content shown in \'el-dialog\' component cannot be empty')
       }
 
       this.options = Object.assign({}, this.globalOptions, userOptions)
