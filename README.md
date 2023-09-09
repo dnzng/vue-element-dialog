@@ -9,9 +9,7 @@ Provides an imperative call to the [el-dialog](https://element.eleme.cn/#/en-US/
 ## Install
 
 ```bash
-npm i vue-element-dialog element-ui
-# or pnpm
-pnpm add vue-element-dialog element-ui
+npm i vue-element-dialog
 ```
 
 ## Usage
